@@ -11,6 +11,7 @@
         closeOnClick: false,
         container_height: "34px",
         delimiter: ", ",
+        items_max_height: "240px",
         placeholder: " - Nothing selected - ",
         width: "240px"
     };
@@ -69,7 +70,7 @@
                 {
                     return $( "<span></span>" ).text(
                         $( select ).find( 'option[selected]' ).length + " selected"
-                    )
+                    );
                 }
                 else
                 {
@@ -89,7 +90,7 @@
         });
         
         // Create an item container
-        var itemContainer = $( "<ul class='itemContainer'></ul>" );
+        var itemContainer = $( "<ul class='itemContainer'></ul>" ).css('max-height', settings.items_max_height);
         
         // Add the items
         for (var i = 0; i < $( select ).find( 'option' ).length; i++)
@@ -101,7 +102,7 @@
                     .attr( 'data-value', option.attr( 'value' ) )
                     .addClass(option.is(['selected']) ? 'selected' : '')
                     .click(clickItem)
-            )
+            );
         }
         
         // Merge all containers
@@ -161,7 +162,11 @@
 
         // If this is not a multiselect, unselect all other options
         var select = $( this ).closest( '.myselect-container' ).prev( 'select' );
-        var option = select.find( 'option[value=' + $(this).data( 'value' ) + ']:contains(\'' + $(this).text() + '\')' );
+        var dit = $(this);
+        var option = select.find( 'option[value=' + $(this).data( 'value' ) + ']' )
+            .filter(function(){
+                return this.innerHTML == dit.text();
+            });
         if ( option.siblings('[selected]').length > 0 && !select.is( '[multiple]' ) )
         {
             option.siblings().removeAttr( 'selected' );
