@@ -1,6 +1,7 @@
 .myselect-container {
   position: relative;
-  border: 1px solid #eeeeee;
+  display: inline-block;
+  border: 1px solid #dddddd;
   font-family: helvetica, arial, sans-serif;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -11,33 +12,46 @@
   cursor: pointer;
 }
 .myselect-container .content {
-  float: left;
-  padding-left: 10px;
-  color: #666666;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: #333333;
   font-size: .8em;
 }
-.myselect-container .caret {
+.myselect-container .content.empty {
+  color: #666666;
+}
+.myselect-container .content .caret {
   float: right;
   font-size: 12px;
-  padding-right: 10px;
-  color: #666666;
+  color: #333333;
 }
 .myselect-container .ddContainer {
   display: none;
   position: absolute;
   left: -1px;
-  border: 1px solid #eeeeee;
+  z-index: 99;
+  border: 1px solid #dddddd;
 }
 .myselect-container .ddContainer .itemContainer {
   list-style: none;
   margin: 0;
   padding: 0;
+  background-color: #fff;
 }
 .myselect-container .ddContainer .itemContainer li {
   padding: 5px 20px;
+  background-color: #fff;
+  color: #333333;
+}
+.myselect-container .ddContainer .itemContainer li:hover {
+  background-color: #e3f3ff;
+  border-bottom: 1px solid #e3f3ff;
 }
 .myselect-container .ddContainer .itemContainer li:not(:last-of-type) {
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #dddddd;
 }
 .myselect-container .ddContainer .itemContainer li.selected {
   background-color: #0084e3;

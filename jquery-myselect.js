@@ -9,7 +9,8 @@
         caret_down: "&#9660;",
         caret_up: "&#9650;",
         closeOnClick: false,
-        container_height: "24px",
+        container_height: "34px",
+        delimiter: ", ",
         placeholder: " - Nothing selected - ",
         width: "240px"
     };
@@ -66,20 +67,21 @@
                 // Any selected options?
                 if ($( select ).find( 'option[selected]' ).length)
                 {
-                    return $( select ).find( 'option[selected]' ).length + " selected";
+                    return $( "<span></span>" ).text(
+                        $( select ).find( 'option[selected]' ).length + " selected"
+                    )
                 }
                 else
                 {
-                    return settings.placeholder;
+                    $(this).addClass( 'empty' );
+                    return $( "<span></span>" ).text( settings.placeholder );
                 }
             })
+            .append(
+                $( "<div></div>" ).addClass( "caret" ).html( settings.caret_down )    
+            )
         );
-        
-        // Add the caret
-        container.append(
-            $( "<div></div>" ).addClass( "caret" ).html( settings.caret_down )    
-        );
-        
+
         // Create a dropdown container
         var ddContainer = $( "<div class='ddContainer'></div>" ).css({
             width: settings.width,
@@ -124,6 +126,9 @@
         // Prevent the closeSelects form firing
         e.stopPropagation();
         
+        // CLose all other selects 
+        closeSelects();
+        
         // Get the container of this select
         var container = $( this );
         
@@ -153,20 +158,41 @@
     function clickItem( e ) {
         // Prevent the closeSelects form firing
         e.stopPropagation();
+
+        // If this is not a multiselect, unselect all other options
+        var select = $( this ).closest( '.myselect-container' ).prev( 'select' );
+        var option = select.find( 'option[value=' + $(this).data( 'value' ) + ']:contains(\'' + $(this).text() + '\')' );
+        if ( option.siblings('[selected]').length > 0 && !select.is( '[multiple]' ) )
+        {
+            option.siblings().removeAttr( 'selected' );
+            $(this).siblings().removeClass( 'selected' );
+        }
         
         // Toggle the active class
-        $(this).toggleClass('selected');
+        $( this ).toggleClass( 'selected' );
         
         // toggle the selected property in the select
-        var select = $(this).closest('.myselect-container').prev('select');
-        var option = select.find('option[value=' + $(this).data('value') + ']:contains(\'' + $(this).text() + '\')');
-        if (option.is('[selected]'))
+        if ( option.is( '[selected]' ) )
         {
-            option.removeAttr('selected').prop('selected', false);
+            option.removeAttr( 'selected' ).prop( 'selected', false );
         }
         else
         {
-            option.attr('selected', 'selected').prop('selected', true);
+            option.attr( 'selected', 'selected' ).prop( 'selected', true );
+        }
+        
+        // Edit the selected items in the container placeholder
+        var options = select.find( 'option[selected]' );
+        var content = $( this ).closest( '.myselect-container' ).find( '.content' );
+        if ( options.length )
+        {
+            content.find("span").text( $.map( options, function( o ) { return o.innerHTML; }).join( settings.delimiter ) );
+            content.removeClass( 'empty' );
+        }
+        else
+        {
+            content.find("span").text(settings.placeholder);
+            content.addClass( 'empty' );
         }
     }
 

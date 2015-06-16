@@ -1,12 +1,15 @@
 @myselect-color-active-bg: #0084E3;
 @myselect-color-active-text: #fff;
-@myselect-color-border: #eee;
-@myselect-color-text: #666;
+@myselect-color-border: #ddd;
+@myselect-color-hover-bg: lighten(@myselect-color-active-bg, 50%);
+@myselect-color-placeholder: #666;
+@myselect-color-text: #333;
 
 
 .myselect-container {
     position: relative;
-    
+    display: inline-block;
+
     border: 1px solid @myselect-color-border;
     font-family: helvetica,arial,sans-serif;
     
@@ -20,25 +23,33 @@
     }
     
     .content {
-        float: left;
-        padding-left: 10px;
+        position: relative;
+        z-index: 1;
+        
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
         
         color: @myselect-color-text;
         font-size: .8em;
-    }
+        
+        &.empty {
+            color: @myselect-color-placeholder;
+        }
+        
+        .caret {
+            float: right;
+            font-size: 12px;
     
-    .caret {
-        float: right;
-        font-size: 12px;
-        padding-right: 10px;
+            color: @myselect-color-text;
+        }
+    }
 
-        color: @myselect-color-text;
-    }
-    
     .ddContainer {
         display: none;
         position: absolute;
         left: -1px;
+        z-index: 99;
 
         border: 1px solid @myselect-color-border;
         
@@ -47,8 +58,17 @@
             margin: 0;
             padding: 0;
             
+            background-color: #fff;
+            
             li {
                 padding: 5px 20px;
+                background-color: #fff;
+                color: @myselect-color-text;
+                
+                &:hover {
+                    background-color: @myselect-color-hover-bg;
+                    border-bottom: 1px solid @myselect-color-hover-bg;
+                }
                 
                 &:not(:last-of-type) {
                     border-bottom: 1px solid @myselect-color-border;
