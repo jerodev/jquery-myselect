@@ -81,7 +81,7 @@
                 }
             })
             .append(
-                $( "<div></div>" ).addClass( "caret" ).html( settings.caret_down )    
+                $( "<div></div>" ).addClass( "select-caret" ).html( settings.caret_down )    
             )
         );
 
@@ -136,7 +136,7 @@
         var container = $( this );
         
         // Toggle the caret
-        container.find( '.caret' )
+        container.find( '.select-caret' )
             .html( container.is( ".open" ) ? settings.caret_down : settings.caret_up );
         
         // Toggle the open class
@@ -150,7 +150,7 @@
     function closeSelects() {
         $( ".myselect-container" ).each(function(){
             $( this ).removeClass( 'open' );
-            $( this ).find( '.caret' ).html( settings.caret_down );
+            $( this ).find( '.select-caret' ).html( settings.caret_down );
         });
     }
     

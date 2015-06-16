@@ -30,7 +30,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.myselect-container .content .caret {
+.myselect-container .content .select-caret {
   float: right;
   font-size: 12px;
   color: #333333;
