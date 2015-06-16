@@ -1,2 +1,5 @@
 # jQuery myselect
-## This library is still under construction. IT DOES NOT WORK YET!
+
+This is yet another jQuery multiselect library. The difference with other libraries 
+is that this one was made with customization in mind. I tried to make this library
+as small and simple as possible.

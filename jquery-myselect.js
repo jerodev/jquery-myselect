@@ -13,7 +13,9 @@
         delimiter: ", ",
         items_max_height: "240px",
         placeholder: " - Nothing selected - ",
-        width: "240px"
+        placeholder_x_selected: "# selected",
+        width: "240px",
+        x_selected_after: 4
     };
 
 
@@ -191,7 +193,17 @@
         var content = $( this ).closest( '.myselect-container' ).find( '.content' );
         if ( options.length )
         {
-            content.find("span").text( $.map( options, function( o ) { return o.innerHTML; }).join( settings.delimiter ) );
+            // Display 'x selected' after y elements have been selected
+            if (options.length <= settings.x_selected_after)
+            {
+                content.find("span").text( $.map( options, function( o ) { return o.innerHTML; }).join( settings.delimiter ) );
+            }
+            else
+            {
+                content.find("span").text(settings.placeholder_x_selected.replace(/#/, options.length));
+            }
+            
+            
             content.removeClass( 'empty' );
         }
         else

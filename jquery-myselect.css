@@ -23,6 +23,13 @@
 .myselect-container .content.empty {
   color: #666666;
 }
+.myselect-container .content span {
+  float: left;
+  max-width: 90%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .myselect-container .content .caret {
   float: right;
   font-size: 12px;
