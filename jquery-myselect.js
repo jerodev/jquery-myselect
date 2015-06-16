@@ -156,6 +156,18 @@
         
         // Toggle the active class
         $(this).toggleClass('selected');
+        
+        // toggle the selected property in the select
+        var select = $(this).closest('.myselect-container').prev('select');
+        var option = select.find('option[value=' + $(this).data('value') + ']:contains(\'' + $(this).text() + '\')');
+        if (option.is('[selected]'))
+        {
+            option.removeAttr('selected').prop('selected', false);
+        }
+        else
+        {
+            option.attr('selected', 'selected').prop('selected', true);
+        }
     }
 
 }(jQuery));
