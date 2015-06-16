@@ -1,0 +1,74 @@
+body, html {
+    height: 100%;
+    background-color: #fafafa;
+}
+
+.well {
+    background-color: #fff;
+}
+
+.container-fluid {
+    height: 100%;
+    padding-left: 0;
+}
+
+#panel-left {
+    position: fixed;
+    width: 25%;
+    
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    
+    -moz-box-shadow: 5px 0 5px #ddd;
+    -webkit-box-shadow: 5px 0 5px #ddd;
+    box-shadow: 5px 0 5px #ddd;
+}
+
+#panel-left .well {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    border-right: 1px solid #ddd;
+}
+
+#panel-left header {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+#panel-left header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+#panel-left header h2 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+#panel-left .btn-group-vertical {
+    width: 100%;
+    border: 0;
+    box-shadow: none;
+}
+#panel-left .btn {
+    padding: 10px 50px;
+    border-radius: 0 !important;
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    box-shadow: none;
+    
+    text-align: left;
+}
+
+#panel-right {
+    float: right;
+    padding-right: 0;
+}
+
+#panel-right .well {
+    margin: 25px;
+    
+    border: 1px solid #ddd;
+}

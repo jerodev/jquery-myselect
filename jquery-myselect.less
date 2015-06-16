@@ -1,0 +1,72 @@
+@myselect-color-active-bg: #0084E3;
+@myselect-color-active-text: #fff;
+@myselect-color-border: #eee;
+@myselect-color-text: #666;
+
+
+.myselect-container {
+    position: relative;
+    
+    border: 1px solid @myselect-color-border;
+    font-family: helvetica,arial,sans-serif;
+    
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    &:hover {
+        cursor: pointer;
+    }
+    
+    .content {
+        float: left;
+        padding-left: 10px;
+        
+        color: @myselect-color-text;
+        font-size: .8em;
+    }
+    
+    .caret {
+        float: right;
+        font-size: 12px;
+        padding-right: 10px;
+
+        color: @myselect-color-text;
+    }
+    
+    .ddContainer {
+        display: none;
+        position: absolute;
+        left: -1px;
+
+        border: 1px solid @myselect-color-border;
+        
+        .itemContainer {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            
+            li {
+                padding: 5px 20px;
+                
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid @myselect-color-border;
+                }
+                
+                &.selected {
+                    background-color: @myselect-color-active-bg;
+                    border-bottom: 1px solid @myselect-color-active-bg;
+                    color: @myselect-color-active-text;
+                }
+            }
+            
+        }
+    }
+    
+    &.open {
+        .ddContainer {
+            display: block !important;
+        }
+    }
+}

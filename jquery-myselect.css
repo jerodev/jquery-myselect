@@ -1,0 +1,49 @@
+.myselect-container {
+  position: relative;
+  border: 1px solid #eeeeee;
+  font-family: helvetica, arial, sans-serif;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.myselect-container:hover {
+  cursor: pointer;
+}
+.myselect-container .content {
+  float: left;
+  padding-left: 10px;
+  color: #666666;
+  font-size: .8em;
+}
+.myselect-container .caret {
+  float: right;
+  font-size: 12px;
+  padding-right: 10px;
+  color: #666666;
+}
+.myselect-container .ddContainer {
+  display: none;
+  position: absolute;
+  left: -1px;
+  border: 1px solid #eeeeee;
+}
+.myselect-container .ddContainer .itemContainer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.myselect-container .ddContainer .itemContainer li {
+  padding: 5px 20px;
+}
+.myselect-container .ddContainer .itemContainer li:not(:last-of-type) {
+  border-bottom: 1px solid #eeeeee;
+}
+.myselect-container .ddContainer .itemContainer li.selected {
+  background-color: #0084e3;
+  border-bottom: 1px solid #0084e3;
+  color: #ffffff;
+}
+.myselect-container.open .ddContainer {
+  display: block !important;
+}
