@@ -128,30 +128,50 @@
         
         // Prevent the closeSelects form firing
         e.stopPropagation();
-        
-        // CLose all other selects 
-        closeSelects();
+        e.preventDefault();
         
         // Get the container of this select
         var container = $( this );
         
+        // Is the current container open?
+        var open = container.is( '.open' );
+        
+        // CLose all other selects 
+        closeSelects();
+        
         // Toggle the caret
         container.find( '.select-caret' )
-            .html( container.is( ".open" ) ? settings.caret_down : settings.caret_up );
+            .html( open ? settings.caret_down : settings.caret_up );
         
         // Toggle the open class
-        container.toggleClass( "open" );
+        if ( open )
+        {
+            container.removeClass( "open" );
+        }
+        else
+        {
+            container.addClass( "open" );
+        }
     }
     
     
     /**
      *  Close all dropdowns
      */
-    function closeSelects() {
-        $( ".myselect-container" ).each(function(){
-            $( this ).removeClass( 'open' );
-            $( this ).find( '.select-caret' ).html( settings.caret_down );
-        });
+    function closeSelects( $select ) {
+        if ($select instanceof jQuery)
+        {
+            var container = $($select).next('.myselect-container');
+            container.removeClass( 'open' );
+            container.find( '.select-caret' ).html( settings.caret_down );
+        }
+        else
+        {
+            $( ".myselect-container" ).each(function() {
+                $( this ).removeClass( 'open' );
+                $( this ).find( '.select-caret' ).html( settings.caret_down );
+            });
+        }
     }
     
     
@@ -169,7 +189,7 @@
             .filter(function(){
                 return this.innerHTML == dit.text();
             });
-        if ( option.siblings('[selected]').length > 0 && !select.is( '[multiple]' ) )
+        if ( option.siblings( '[selected]' ).length > 0 && !select.is( '[multiple]' ) )
         {
             option.siblings().removeAttr( 'selected' );
             $(this).siblings().removeClass( 'selected' );
@@ -211,12 +231,15 @@
             content.find("span").text( getPlaceholder( select ) );
             content.addClass( 'empty' );
         }
+        
+        if (settings.closeOnClick && !select.is( '[multiple]' ))
+            closeSelects( select );
     }
     
     
-    function getPlaceholder( select ) {
-        if (select.attr('data-placeholder'))
-            return select.data('placeholder');
+    function getPlaceholder( $select ) {
+        if ( $select.attr( 'data-placeholder' ) )
+            return $select.data( 'placeholder' );
         else
             return settings.placeholder;
     }
