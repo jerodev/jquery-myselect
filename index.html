@@ -7,7 +7,9 @@
         <link rel="stylesheet" href="jquery-myselect.css" />
         <script>
             $(function(){
-                $("select").myselect();
+                $("select").myselect({
+                    onRendered: function(a, b){ console.log(a, b); }
+                });
             })
         </script>
     </head>
