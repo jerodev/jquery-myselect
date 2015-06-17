@@ -5,7 +5,7 @@
     /**
      *  The default options for this plugin
      */
-    var settings = {
+    var defaults = {
         caret_down: "&#9660;",
         caret_up: "&#9650;",
         closeOnClick: false,
@@ -29,7 +29,7 @@
     $.fn.myselect = function( options ){
         
         // Extend the provided settings
-        settings = $.extend( settings, options );
+        var settings = $.extend( defaults, options );
         
         // Add body events for closing the dropdown on blur
         $(document).unbind( 'click' );
@@ -40,6 +40,9 @@
             
             // Call the render event
             callCallback( settings.onRender, this );
+            
+            // Add the options to the select element
+            $(this).data( 'myselect', settings );
             
             // Build a new selectbox
             var html = buildSelect( this, settings );
@@ -142,6 +145,7 @@
         
         // Get the container of this select
         var container = $( this );
+        var select = container.prev( 'select' );
         
         // Is the current container open?
         var open = container.is( '.open' );
@@ -151,7 +155,7 @@
         
         // Toggle the caret
         container.find( '.select-caret' )
-            .html( open ? settings.caret_down : settings.caret_up );
+            .html( open ? getSettings(select).caret_down : getSettings(select).caret_up );
         
         // Toggle the open class
         if ( open )
@@ -173,13 +177,13 @@
         {
             var container = $($select).next('.myselect-container');
             container.removeClass( 'open' );
-            container.find( '.select-caret' ).html( settings.caret_down );
+            container.find( '.select-caret' ).html( getSettings($select).caret_down );
         }
         else
         {
             $( ".myselect-container" ).each(function() {
                 $( this ).removeClass( 'open' );
-                $( this ).find( '.select-caret' ).html( settings.caret_down );
+                $( this ).find( '.select-caret' ).html( getSettings($(this).prev('select')).caret_down );
             });
         }
     }
@@ -224,13 +228,13 @@
         if ( $options.length )
         {
             // Display 'x selected' after y elements have been selected
-            if ( $options.length <= settings.x_selected_after )
+            if ( $options.length <= getSettings($select).x_selected_after )
             {
-                $content.find("span").text( $.map( $options, function( o ) { return o.innerHTML; }).join( settings.delimiter ) );
+                $content.find("span").text( $.map( $options, function( o ) { return o.innerHTML; }).join( getSettings($select).delimiter ) );
             }
             else
             {
-                $content.find("span").text( settings.placeholder_x_selected.replace( /#/, $options.length ) );
+                $content.find("span").text( getSettings($select).placeholder_x_selected.replace( /#/, $options.length ) );
             }
             
             
@@ -243,11 +247,11 @@
         }
         
         // Close the selectbox if there is a close on click
-        if ( settings.closeOnClick && !$select.is( '[multiple]' ) )
+        if ( getSettings($select).closeOnClick && !$select.is( '[multiple]' ) )
             closeSelects( $select );
             
         // Call the onchange event
-        callCallback( settings.onChange, $select.get( 0 ), $select.next( '.myselect-container' ).get( 0 ) );
+        callCallback( getSettings($select).onChange, $select.get( 0 ), $select.next( '.myselect-container' ).get( 0 ) );
     }
     
     
@@ -258,7 +262,7 @@
         if ( $select.attr( 'data-placeholder' ) )
             return $select.data( 'placeholder' );
         else
-            return settings.placeholder;
+            return getSettings($select).placeholder;
     }
     
     
@@ -269,6 +273,15 @@
         // If this callback is set, execute it!
         if ( callback )
             callback( select, container );
+    }
+    
+    
+    /**
+     *  Get the options for a certain select box
+     */
+    function getSettings( select ) {
+        // Get the options object
+        return $(select).data('myselect');
     }
 
 }(jQuery));
