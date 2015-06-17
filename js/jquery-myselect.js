@@ -40,7 +40,7 @@
         
         // Get the myselect settings
         var settings = {};
-        if ( !( typeof options == "string" ) )
+        if ( typeof options != "string" )
         {
             // Extend the provided settings
             settings = $.extend( settings, defaults, options );
@@ -225,6 +225,7 @@
         e.preventDefault();
         
         // Get the container of this select
+        /*jshint validthis:true */
         var container = $( this );
         var select = container.prev( 'select' );
         
@@ -258,6 +259,7 @@
         e.stopPropagation();
 
         // If this is not a multiselect, unselect all other options
+        /*jshint validthis:true */
         var $dit = $( this );
         var $select = $dit.closest( '.myselect-container' ).prev( 'select' );
         var $option = $select.find( 'option[value=' + $dit.data( 'value' ) + ']' )
