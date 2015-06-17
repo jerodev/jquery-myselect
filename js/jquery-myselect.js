@@ -29,7 +29,7 @@
     $.fn.myselect = function( options ){
         
         // Extend the provided settings
-        var settings = $.extend( defaults, options );
+        var settings = $.extend( settings, defaults, options );
         
         // Add body events for closing the dropdown on blur
         $(document).unbind( 'click' );
@@ -42,7 +42,7 @@
             callCallback( settings.onRender, this );
             
             // Add the options to the select element
-            $(this).data( 'myselect', settings );
+            $( this ).data( 'myselect', settings );
             
             // Build a new selectbox
             var html = buildSelect( this, settings );
