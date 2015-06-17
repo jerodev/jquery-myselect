@@ -64,7 +64,7 @@
             html.insertAfter( this );
             
             // Call the rendered event
-            callCallback( settings.onRendered, this, html.get(0) );
+            callCallback( settings.onRendered, this, html.get( 0 ) );
             
         });
         
@@ -118,15 +118,15 @@
         var itemContainer = $( "<ul class='itemContainer'></ul>" ).css('max-height', settings.items_max_height);
         
         // Add the items
-        for (var i = 0; i < $( select ).find( 'option' ).length; i++)
+        for ( var i = 0; i < $( select ).find( 'option' ).length; i++ )
         {
             var option = $( select ).find( 'option' ).eq( i );
             
             itemContainer.append(
                 $( "<li></li>" ).html( option.html() )
                     .attr( 'data-value', option.attr( 'value' ) )
-                    .addClass(option.is(['selected']) ? 'selected' : '')
-                    .click(clickItem)
+                    .addClass( option.is( '[selected]' ) ? 'selected' : '' )
+                    .click( clickItem )
             );
         }
         
@@ -165,7 +165,7 @@
         
         // Toggle the caret
         container.find( '.select-caret' )
-            .html( open ? getSettings(select).caret_down : getSettings(select).caret_up );
+            .html( open ? getSettings( select ).caret_down : getSettings( select ).caret_up );
         
         // Toggle the open class
         if ( open )
@@ -183,17 +183,17 @@
      *  Close all dropdowns
      */
     function closeSelects( $select ) {
-        if ($select instanceof jQuery)
+        if ( $select instanceof jQuery )
         {
-            var container = $($select).next('.myselect-container');
+            var container = $( $select ).next('.myselect-container');
             container.removeClass( 'open' );
-            container.find( '.select-caret' ).html( getSettings($select).caret_down );
+            container.find( '.select-caret' ).html( getSettings( $select ).caret_down );
         }
         else
         {
             $( ".myselect-container" ).each(function() {
                 $( this ).removeClass( 'open' );
-                $( this ).find( '.select-caret' ).html( getSettings($(this).prev('select')).caret_down );
+                $( this ).find( '.select-caret' ).html( getSettings( $( this ).prev( 'select' ) ).caret_down );
             });
         }
     }
@@ -238,13 +238,13 @@
         if ( $options.length )
         {
             // Display 'x selected' after y elements have been selected
-            if ( $options.length <= getSettings($select).x_selected_after )
+            if ( $options.length <= getSettings( $select ).x_selected_after )
             {
-                $content.find("span").text( $.map( $options, function( o ) { return o.innerHTML; }).join( getSettings($select).delimiter ) );
+                $content.find("span").text( $.map( $options, function( o ) { return o.innerHTML; }).join( getSettings( $select ).delimiter ) );
             }
             else
             {
-                $content.find("span").text( getSettings($select).placeholder_x_selected.replace( /#/, $options.length ) );
+                $content.find("span").text( getSettings( $select ).placeholder_x_selected.replace( /#/, $options.length ) );
             }
             
             
@@ -272,7 +272,7 @@
         if ( $select.attr( 'data-placeholder' ) )
             return $select.data( 'placeholder' );
         else
-            return getSettings($select).placeholder;
+            return getSettings( $select ).placeholder;
     }
     
     
@@ -291,7 +291,7 @@
      */
     function getSettings( select ) {
         // Get the options object
-        return $(select).data('myselect');
+        return $( select ).data( 'myselect' );
     }
 
-}(jQuery));
+}( jQuery ) );
