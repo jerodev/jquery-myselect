@@ -77,7 +77,7 @@
                 else
                 {
                     $(this).addClass( 'empty' );
-                    return $( "<span></span>" ).text( settings.placeholder );
+                    return $( "<span></span>" ).text( getPlaceholder( $( select ) ) );
                 }
             })
             .append(
