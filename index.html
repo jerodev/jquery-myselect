@@ -3,13 +3,11 @@
     <head>
         <title>jQuery-myselect example</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="jquery-myselect.js"></script>
-        <link rel="stylesheet" href="jquery-myselect.css" />
+        <script src="js/jquery-myselect.js"></script>
+        <link rel="stylesheet" href="css/jquery-myselect.css" />
         <script>
             $(function(){
-                $("select").myselect({
-                    onRendered: function(a, b){ console.log(a, b); }
-                });
+                $("select").myselect();
             })
         </script>
     </head>
