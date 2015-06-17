@@ -29,7 +29,7 @@
         
         onChange: null,
         onRender: null,
-        onRendered: null,
+        onRendered: null
     };
 
 
