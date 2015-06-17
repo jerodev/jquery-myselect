@@ -1,6 +1,16 @@
-"use strict";
+/**
+ * jQuery myselect v0.1
+ *
+ * Author:  Jeroen Deviaene
+ * Docs:    https://jerodev.github.io/jquery-myselect
+ *
+ * Released under the MIT license
+ * https://github.com/jerodev/jquery-myselect/blob/master/LICENCE.md
+ */
 
 (function( $ ) {
+    
+    "use strict";
 
     /**
      *  The default options for this plugin
