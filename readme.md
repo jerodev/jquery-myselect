@@ -6,4 +6,4 @@ as small and simple as possible.
 
 ## Examples
 
-Examples of this multiselect can be found on [the documentationwebsite](https://jerodev.github.io/jquery-myselect/).
+Examples of this multiselect can be found on [the documentation website](https://jerodev.github.io/jquery-myselect/).
