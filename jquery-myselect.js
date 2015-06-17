@@ -208,9 +208,17 @@
         }
         else
         {
-            content.find("span").text(settings.placeholder);
+            content.find("span").text( getPlaceholder( select ) );
             content.addClass( 'empty' );
         }
+    }
+    
+    
+    function getPlaceholder( select ) {
+        if (select.attr('data-placeholder'))
+            return select.data('placeholder');
+        else
+            return settings.placeholder;
     }
 
 }(jQuery));
