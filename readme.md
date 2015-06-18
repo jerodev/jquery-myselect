@@ -20,7 +20,10 @@ a the `myselect()` function on this group. If needed, this function will take so
 [documentation](https://jerodev.github.io/jquery-myselect/).
 
 ```
-
+$("select").myselect({ 
+    width: '100%',
+    placeholder: 'Countries in Europe'
+});
 ```
 
 ## Examples
