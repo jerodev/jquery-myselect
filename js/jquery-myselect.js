@@ -225,8 +225,7 @@
         e.preventDefault();
         
         // Get the container of this select
-        /*jshint validthis:true */
-        var container = $( this );
+        var container = $( e.target );
         var select = container.prev( 'select' );
         
         // Is the current container open?
@@ -259,8 +258,7 @@
         e.stopPropagation();
 
         // If this is not a multiselect, unselect all other options
-        /*jshint validthis:true */
-        var $dit = $( this );
+        var $dit = $( e.target );
         var $select = $dit.closest( '.myselect-container' ).prev( 'select' );
         var $option = $select.find( 'option[value=' + $dit.data( 'value' ) + ']' )
             .filter(function() {
