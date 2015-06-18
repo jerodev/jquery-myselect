@@ -5,7 +5,7 @@ notifications:
   email: false
 install:
  - npm install jshint -g
- - npm install lessc -g
+ - npm install less -g
 script:
  - jshint js/jquery-myselect.js
  - lessc css/jquery-myselect.less
