@@ -226,6 +226,10 @@
         
         // Get the container of this select
         var container = $( e.target );
+        if ( container.is( 'span' ) ) 
+        {
+            container = container.closest( '.myselect-container' );
+        }
         var select = container.prev( 'select' );
         
         // Is the current container open?
